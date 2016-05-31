@@ -1,5 +1,32 @@
+下载完成后需要设置一些信息 包括用户名和邮箱
+$ git config --global user.name "your name"
+$ git config --global user.email "your_email@youremail.com"
+命令:
 使用 git init 来初始化一个仓库
 使用 git add <file> 来向仓库中添加一个文件
 使用 git commit -m “说明性文字” 来提交改动
 注意: 在编写文本文件时 为了保证在客户端查看到正确的文件信息,应该使用的编码格式是UTF8无BOM格式 否则,在bash中
 极可能出现乱码
+
+以上是基本操作
+
+关联到远程仓库 github
+请自行注册GitHub账号。由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置
+首先要在本地仓库获取一个SSH Key
+可以使用 ssh-keygen -t rsa -C "youremail@example.com" 来获得一个SSH Key
+输入完成后直接一步步回车就行 在提示中你可以看到SSH Key生成的地址 这步操作后生成了.SSH文件夹
+在文件夹内部可以看到两个文件id_rsa和id_rsa.pub
+id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人
+
+现在转到gitHub中的设置(setting) 然后在左边的列表中摘到SSH点击  在出现的页面中你可以选择添加SSH
+你需要随便写一个Title 并将.pub文件中的内容(该文件可以直接用文本处理的软件打开)复制到那个很大的输入框中
+添加之. 基本的设置就完成了.
+
+
+1.在gitHub上创建一个新的仓库 创建完毕后会得到一个http和一个SSH地址
+2.使用 git remote add [仓库代号] [SSH或者HTTP] 来关联到gitHub 
+3.使用 git push -u [仓库代号] [分支名称]    注意:在一开始的时候只有一个主分支master
+  由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，
+  还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+  
+这时刷新gitHub页面就可以看到 本地仓库和远程仓库同步了!
